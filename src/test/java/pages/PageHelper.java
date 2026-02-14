@@ -24,8 +24,7 @@ public abstract class PageHelper <T extends PageHelper<T>>{
     public void openDriver() {
         ChromeOptions options = new ChromeOptions();
         options.addArguments("--start-maximized");
-        driver = new ChromeDriver();
-        driver.manage().window().maximize();
+        driver = new ChromeDriver(options);
     }
 
     @AfterEach
