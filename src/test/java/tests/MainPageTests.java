@@ -2,15 +2,14 @@ package tests;
 
 import org.junit.jupiter.api.*;
 import pages.MainPage;
-import pages.PageHelper;
 
 
-public class MainPageTests extends PageHelper<MainPageTests> {
+public class MainPageTests extends BaseTest {
     private MainPage page;
 
     @BeforeEach
     void setUp() {
-        page = new MainPage(driver);
+        page = new MainPage();
     }
 
     @DisplayName("Main page is opened")
@@ -40,10 +39,5 @@ public class MainPageTests extends PageHelper<MainPageTests> {
                         "          ")
                 .clickHomeBtn()
                 .checkTextIsVisible("Welcome!");
-    }
-
-    @Override
-    protected MainPageTests self() {
-        return this ;
     }
 }
