@@ -18,15 +18,53 @@ public class AuthPageTests extends BaseTest {
     @Test
     public void openAuthPageTest() {
         page.openPage()
-                .checkTextIsVisible("Login - Shop");
+                .checkAuthPageIsOpen();
     }
 
     @DisplayName("Enter valid credits")
     @Test
-    public void enterValidCredits() {
+    public void enterValidCreditsTest() {
         page.openPage()
                 .writeEmail(Config.getProperty("email"))
-                .writePassword(Config.getProperty("password"));
-        // нужно придумать как дальше проверять. Происходит ридерект на магазин
+                .writePassword(Config.getProperty("password"))
+                .clickSubmitBtn()
+                .logoutVisible();
+    }
+
+    @DisplayName("Logout")
+    @Test
+    public void logoutTest() {
+        page.openPage()
+                .writePassword(Config.getProperty("password"))
+                .writeEmail(Config.getProperty("email"))
+                .clickSubmitBtn()
+                .clickLogout()
+                .checkAuthPageIsOpen();
+    }
+
+    @DisplayName("Enter invalid credits")
+    @Test
+    public void enterInvalidCreditsTest() {
+        page.openPage()
+                .writeEmail("test@test.ru")
+                .writePassword("password")
+                .clickSubmitBtn()
+                .alertIsVisible();
+    }
+
+    @DisplayName("Password should be hidden")
+    @Test
+    public void passwordIsHiddenTest() {
+        page.openPage()
+                .writePassword("password")
+                .checkPasswordIsHidden("password");
+    }
+
+    @DisplayName("Enter no credits")
+    @Test
+    public void enterNoCresitsTest() {
+        page.openPage()
+                .clickSubmitBtn()
+                .alertIsVisible();
     }
 }

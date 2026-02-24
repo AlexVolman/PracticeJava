@@ -16,7 +16,7 @@ public class MainPageTests extends BaseTest {
     @Test
     public void welcomePageTest() {
         page.openPage()
-                .checkTextIsVisible("Welcome!");
+                .checkWelcomeSectionIsOpen();
     }
 
     @DisplayName("Hide/Open sidebar")
@@ -34,10 +34,8 @@ public class MainPageTests extends BaseTest {
     public void contactHomePagesTest(){
         page.openPage()
                 .clickContactBtn()
-                .checkTextIsVisible("\n" +
-                        "            Contact us\n" +
-                        "          ")
+                .checkContactSectionIsOpen()
                 .clickHomeBtn()
-                .checkTextIsVisible("Welcome!");
+                .checkWelcomeSectionIsOpen();
     }
 }
