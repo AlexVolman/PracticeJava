@@ -2,22 +2,21 @@ package tests;
 
 import org.junit.jupiter.api.*;
 import pages.MainPage;
-import pages.PageHelper;
 
 
-public class MainPageTests extends PageHelper<MainPageTests> {
+public class MainPageTests extends BaseTest {
     private MainPage page;
 
     @BeforeEach
     void setUp() {
-        page = new MainPage(driver);
+        page = new MainPage();
     }
 
     @DisplayName("Main page is opened")
     @Test
     public void welcomePageTest() {
         page.openPage()
-                .checkTextIsVisible("Welcome!");
+                .checkWelcomeSectionIsOpen();
     }
 
     @DisplayName("Hide/Open sidebar")
@@ -35,15 +34,8 @@ public class MainPageTests extends PageHelper<MainPageTests> {
     public void contactHomePagesTest(){
         page.openPage()
                 .clickContactBtn()
-                .checkTextIsVisible("\n" +
-                        "            Contact us\n" +
-                        "          ")
+                .checkContactSectionIsOpen()
                 .clickHomeBtn()
-                .checkTextIsVisible("Welcome!");
-    }
-
-    @Override
-    protected MainPageTests self() {
-        return this ;
+                .checkWelcomeSectionIsOpen();
     }
 }

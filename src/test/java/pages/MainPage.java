@@ -1,65 +1,71 @@
 package pages;
 
+import com.codeborne.selenide.SelenideElement;
 import config.Config;
-import org.junit.jupiter.api.Assertions;
-import org.openqa.selenium.By;
-import org.openqa.selenium.WebDriver;
+
+import static com.codeborne.selenide.Condition.cssClass;
+import static com.codeborne.selenide.Condition.visible;
+import static com.codeborne.selenide.Selenide.$;
+import static com.codeborne.selenide.Selenide.open;
 
 import java.util.Objects;
 
 public class MainPage extends PageHelper<MainPage> {
 
-    protected By eltHideSidebarBtn = By.xpath("//*[@id='sidebarCollapse']");
-    protected By eltSidebar = By.xpath("//*[@class=\"active\" and @id=\"sidebar\"]");
-    protected By eltContactBtn = By.xpath("//*[@id=\"contact\"]");
-    protected By eltHomeBtn = By.xpath("//*[@id=\"home\"]");
-
-    public MainPage(WebDriver driver){
-        this.driver = driver;
-    }
+    //
+    private final SelenideElement eltContactBtn = $("#contact");
+    private final SelenideElement eltHomeBtn = $("#home");
+    private final SelenideElement eltHideSidebarBtn = $("#sidebarCollapse");
+    private final SelenideElement eltSidebar = $("#sidebar");
+    private final SelenideElement eltWelcomeSection = $(".jumbotron jumbotron-fluid");
+    private final SelenideElement eltContactSection = $(".mb-4");
 
     protected MainPage self() {
         return Objects.requireNonNull(this);  // Возвращаем текущий экземпляр MainPage
     }
 
     public MainPage openPage(){
-        driver.get(Config.getBaseUrl());
+        open(Config.getBaseUrl());
+        return this;
+    }
+
+    public MainPage checkWelcomeSectionIsOpen() {
+        eltWelcomeSection.shouldBe(visible);
+        return this;
+    }
+
+    public MainPage checkContactSectionIsOpen() {
+        eltContactSection.shouldBe(visible);
         return this;
     }
 
     // относится ко всем страницам
     public MainPage clickContactBtn() {
-        driver.findElement(eltContactBtn).click();
+        eltContactBtn.shouldBe(visible).click();
         return this;
     }
 
     // относится ко всем страницам
     public MainPage clickHomeBtn() {
-        driver.findElement(eltHomeBtn).click();
+        eltHomeBtn.click();
         return this;
     }
 
     // относится ко всем страницам
     public MainPage clickSidebarBtn() {
-        driver.findElement(eltHideSidebarBtn).click();
+        eltHideSidebarBtn.click();
         return this;
     }
 
     // относится ко всем страницам
     public MainPage checkSidebarIsVisible() {
-        Assertions.assertTrue(driver.findElements(eltSidebar).isEmpty());
+        eltSidebar.shouldNotHave(cssClass("active"));
         return this;
     }
 
     // относится ко всем страницам
     public MainPage checkSidebarIsHide() {
-        Assertions.assertTrue(driver.findElement(eltSidebar).isDisplayed());
+        eltSidebar.shouldHave(cssClass("active"));
         return this;
     }
-
-// пример перехода на другую страницу
-//    public CartPage addToCart() {
-//        driver.findElement(addBtn).click();
-//        return new CartPage(driver);  // Переход на новую страницу
-//    }
 }
