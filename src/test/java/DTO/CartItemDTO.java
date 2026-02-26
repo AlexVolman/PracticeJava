@@ -1,21 +1,30 @@
 package DTO;
 
+public class CartItemDTO {
 
-class CartItem {
     private final String title;
+
     private final String basePrice; // цена за единицу (из списка товаров)
+
     private int quantity;
 
-    CartItem(String title, String basePrice, int quantity) {
+    public CartItemDTO(String title, String basePrice, int quantity) {
         this.title = title;
         this.basePrice = basePrice;
         this.quantity = quantity;
     }
 
-    // Геттеры
-    String getTitle() { return title; }
-    String getBasePrice() { return basePrice; }
-    int getQuantity() { return quantity; }
+    public String getTitle() {
+        return this.title;
+    }
+
+    public String getBasePrice() {
+        return this.basePrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
 
     @Override
     public String toString() {
