@@ -1,12 +1,22 @@
 package DTO;
 
 public class ProductItemDTO {
-    public final String title;
+
+    final String title;
+
     final String price;
 
-    ProductItemDTO(String title, String price) {
+    public ProductItemDTO(String title, String price) {
         this.title = title;
         this.price = price;
+    }
+
+    public String getPrice() {
+        return price;
+    }
+
+    public String getTitle() {
+        return title;
     }
 
     @Override

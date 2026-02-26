@@ -1,5 +1,8 @@
 package tests;
 
+import DTO.CartItemDTO;
+import DTO.ProductItemDTO;
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -23,7 +26,17 @@ public class ProductCartTests extends BaseTest{
     @DisplayName("Add item to cart")
     @Test
     public void addItemToCartTest() {
+        page.openPage();
+        ProductItemDTO expecterItem = page.getProductItemByIndex(0);
         page.addToCartByIndex(0);
+
+        CartItemDTO actualItem = page.getCartItemByIndex(0);
+
+        Assertions.assertEquals(expecterItem.getTitle(), actualItem.getTitle());
+
+        Assertions.assertEquals(expecterItem.getPrice(), actualItem.getBasePrice());
+
+        Assertions.assertEquals(1, actualItem.getQuantity());
     }
 
     @DisplayName("Remove item from cart")
@@ -49,4 +62,11 @@ public class ProductCartTests extends BaseTest{
     public void purchaseItemsTest() {
 
     }
+
+    @DisplayName("Number of items in cart cant be 0")
+    @Test
+    public void numOfItemCantBeZeroTest() {
+
+    }
+
 }
