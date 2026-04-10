@@ -22,6 +22,7 @@ public class AuthPage extends PageHelper<AuthPage> {
     protected AuthPage self() {
         return Objects.requireNonNull(this);
     }
+
     public AuthPage openPage() {
         open(Config.getPageUrl("authEndpoint"));
         return this;
