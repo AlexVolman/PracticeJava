@@ -6,7 +6,7 @@ public class CartItemDTO {
 
     private final String basePrice; // цена за единицу (из списка товаров)
 
-    private int quantity;
+    private final int quantity;
 
     public CartItemDTO(String title, String basePrice, int quantity) {
         this.title = title;
