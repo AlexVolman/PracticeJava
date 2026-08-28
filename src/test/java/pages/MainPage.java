@@ -12,11 +12,6 @@ import java.util.Objects;
 
 public class MainPage extends PageHelper<MainPage> {
 
-    //
-    private final SelenideElement eltContactBtn = $("#contact");
-    private final SelenideElement eltHomeBtn = $("#home");
-    private final SelenideElement eltHideSidebarBtn = $("#sidebarCollapse");
-    private final SelenideElement eltSidebar = $("#sidebar");
     private final SelenideElement eltWelcomeSection = $(".jumbotron jumbotron-fluid");
     private final SelenideElement eltContactSection = $(".mb-4");
 
@@ -36,36 +31,6 @@ public class MainPage extends PageHelper<MainPage> {
 
     public MainPage checkContactSectionIsOpen() {
         eltContactSection.shouldBe(visible);
-        return this;
-    }
-
-    // относится ко всем страницам
-    public MainPage clickContactBtn() {
-        eltContactBtn.shouldBe(visible).click();
-        return this;
-    }
-
-    // относится ко всем страницам
-    public MainPage clickHomeBtn() {
-        eltHomeBtn.click();
-        return this;
-    }
-
-    // относится ко всем страницам
-    public MainPage clickSidebarBtn() {
-        eltHideSidebarBtn.click();
-        return this;
-    }
-
-    // относится ко всем страницам
-    public MainPage checkSidebarIsVisible() {
-        eltSidebar.shouldNotHave(cssClass("active"));
-        return this;
-    }
-
-    // относится ко всем страницам
-    public MainPage checkSidebarIsHide() {
-        eltSidebar.shouldHave(cssClass("active"));
         return this;
     }
 }
